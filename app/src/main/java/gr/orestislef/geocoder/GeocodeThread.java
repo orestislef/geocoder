@@ -24,6 +24,7 @@ public class GeocodeThread implements Runnable {
 
     @Override
     public void run() {
+        new  Handler(Looper.getMainLooper()).post(listener::onGeocodeLoading);
         Geocoder geocoder = new Geocoder(context);
         List<Address> addresses = null;
         try {
@@ -38,6 +39,7 @@ public class GeocodeThread implements Runnable {
 
     public interface GeocodeListener {
         void onGeocodeCompleted(List<Address> addresses);
+        void onGeocodeLoading();
     }
 }
 

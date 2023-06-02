@@ -12,6 +12,14 @@
         android:layout_height="wrap_content"
         android:hint="Enter Address" />
 
+    <ProgressBar
+        android:id="@+id/loadingPB"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resultsRV"
         android:layout_width="match_parent"
