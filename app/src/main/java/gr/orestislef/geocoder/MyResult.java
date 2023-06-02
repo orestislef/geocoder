@@ -2,12 +2,11 @@ package gr.orestislef.geocoder;
 
 public class MyResult {
     String address;
-    double lat, lng;
+    LatLng latLng;
 
-    public MyResult(String address, double lat, double lng) {
+    public MyResult(String address, LatLng latLng) {
         this.address = address;
-        this.lat = lat;
-        this.lng = lng;
+        this.latLng = latLng;
     }
 
     public String getAddress() {
@@ -18,19 +17,11 @@ public class MyResult {
         this.address = address;
     }
 
-    public double getLat() {
-        return lat;
+    public LatLng getLatLng() {
+        return latLng;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public void setLng(double lng) {
-        this.lng = lng;
+    public void setLatLng(LatLng latLng) {
+        this.latLng = latLng;
     }
 }

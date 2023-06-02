@@ -46,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
                     for (Address address : addresses) {
                         MyResult result = new MyResult(
                                 address.getAddressLine(0),
-                                address.getLatitude(),
-                                address.getLongitude());
+                                new LatLng(
+                                        address.getLatitude(),
+                                        address.getLongitude()));
                         resultArrayList.add(result);
                     }
                     adapter.add(resultArrayList);
