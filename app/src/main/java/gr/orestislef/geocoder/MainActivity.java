@@ -4,7 +4,6 @@ import android.location.Address;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                GeocodeThread geocodeThread = new GeocodeThread(getApplicationContext(), new GeocodeThread.GeocodeListener() {
+                GeocodeThread geocodeThread = new GeocodeThread(MainActivity.this, new GeocodeThread.GeocodeListener() {
                     @Override
                     public void onGeocodeCompleted(List<Address> addresses) {
                         if (addresses == null)
@@ -62,11 +61,19 @@ public class MainActivity extends AppCompatActivity {
                         }
                         adapter.add(resultArrayList);
                         loadingPB.setVisibility(View.GONE);
+                        inputAddressET.setError(null);
                     }
 
                     @Override
                     public void onGeocodeLoading() {
+                        inputAddressET.setError(null);
                         loadingPB.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onGeoCodeError(String localizedMessage) {
+                        loadingPB.setVisibility(View.GONE);
+                        inputAddressET.setError(localizedMessage);
                     }
                 }, s.toString());
 

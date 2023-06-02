@@ -24,22 +24,26 @@ public class GeocodeThread implements Runnable {
 
     @Override
     public void run() {
-        new  Handler(Looper.getMainLooper()).post(listener::onGeocodeLoading);
+        new Handler(Looper.getMainLooper()).post(listener::onGeocodeLoading);
         Geocoder geocoder = new Geocoder(context);
         List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocationName(locationName, MAX_RESULTS);
         } catch (IOException e) {
             e.printStackTrace();
+            new Handler(Looper.getMainLooper()).post(() -> listener.onGeoCodeError(e.getLocalizedMessage()));
         }
 
         final List<Address> finalAddresses = addresses;
-        new  Handler(Looper.getMainLooper()).post(() -> listener.onGeocodeCompleted(finalAddresses));
+        new Handler(Looper.getMainLooper()).post(() -> listener.onGeocodeCompleted(finalAddresses));
     }
 
     public interface GeocodeListener {
         void onGeocodeCompleted(List<Address> addresses);
+
         void onGeocodeLoading();
+
+        void onGeoCodeError(String localizedMessage);
     }
 }
 
